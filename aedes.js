@@ -16,7 +16,8 @@
 
 module.exports = function (RED) {
   'use strict';
-  const mongoPersistence = require('aedes-persistence-mongodb');
+  const MongoPersistence = require('aedes-persistence-mongodb');
+  const NedbPersistence = require('aedes-persistence-nedb');
   const aedes = require('aedes');
   const net = require('net');
   const tls = require('tls');
@@ -66,11 +67,17 @@ module.exports = function (RED) {
     const aedesSettings = {};
     const serverOptions = {};
 
-    if (config.dburl) {
-      aedesSettings.persistence = mongoPersistence({
+    if ((config.persistence_bind === 'mongodb') && config.dburl) {
+      aedesSettings.persistence = MongoPersistence({
         url: config.dburl
       });
       node.log('Start persistence to MongeDB');
+    } else if (config.persistence_bind === 'nedb') {
+      aedesSettings.persistence = NedbPersistence({
+        path: RED.settings.userDir,
+        prefix: 'mqtt'
+      });
+      node.log('Start persistence to NeDB');
     }
 
     if ((this.cert) && (this.key) && (this.usetls)) {

@@ -6,6 +6,7 @@
     },
     "label": {
       "mqtt_port": "MQTT port",
+      "mqtt_ws_bind": "WS bind",
       "mqtt_ws_port": "WS port",
       "mqtt_ws_path": "WS path",
       "use-tls": "Enable secure (SSL/TLS) connection",
@@ -13,7 +14,11 @@
       "upload": "Upload",
       "cert": "Certificate",
       "key": "Private Key",
-      "dburl": "DB Url"
+      "persistence_bind": "Persistence",
+      "persistence_memory": "Memory",
+      "persistence_mongodb": "MongoDB",
+      "persistence_nedb": "NeDB",
+      "mongodb_dburl": "MongoDB Url"
     },
     "placeholder": {
       "mqtt_port": "Enter MQTT port",
@@ -21,7 +26,7 @@
       "mqtt_ws_path": "Enter Websocket path. Leave blank to disable Websocket support",
       "cert": "path to certificate (PEM format)",
       "key": "path to private key (PEM format)",
-      "dburl": "mongodb://localhost:27017/mqtt",
+      "mongodb_dburl": "mongodb://localhost:27017/mqtt",
       "username": "leave blank to disable authentication",
       "password": "leave blank to disable authentication"
     },

@@ -1,5 +1,9 @@
 # node-red-contrib-aedes Changelog
 
+## Mar 14, 2021, Version 0.6.0
+### Notable changes
+- Add NeDB persistence
+
 ## Mar 08, 2021, Version 0.5.1
 ### Notable changes
 - Update aedes to version 0.45

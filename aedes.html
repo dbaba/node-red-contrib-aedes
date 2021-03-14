@@ -29,17 +29,17 @@
                 <input type="text" id="node-input-mqtt_port" data-i18n="[placeholder]aedes-mqtt-broker.placeholder.mqtt_port">
             </div>
             <div class="form-row">
-                <label for="node-input-mqtt_ws_bind"><i class="fa fa-globe"></i> WS bind</label>
+                <label for="node-input-mqtt_ws_bind"><i class="fa fa-globe"></i> <span data-i18n="aedes-mqtt-broker.label.mqtt_ws_bind"></label>
                 <select id="node-input-mqtt_ws_bind" type="text" style="width:30%" text-center>
-                <option value="path" default>path</option>
-                <option value="port">port</option>
+                    <option value="port" data-i18n="aedes-mqtt-broker.label.mqtt_ws_port" default></option>
+                    <option value="path" data-i18n="aedes-mqtt-broker.label.mqtt_ws_path"></option>
                 </select>
             </div>
-            <div class="form-row" id="node-input-mqtt_ws_path-label">
+            <div class="form-row" id="node-row-mqtt_ws_path">
                 <label for="node-input-mqtt_ws_path"><i class="fa fa-globe"></i> <span data-i18n="aedes-mqtt-broker.label.mqtt_ws_path"></label>
                 <input type="text" id="node-input-mqtt_ws_path" data-i18n="[placeholder]aedes-mqtt-broker.placeholder.mqtt_ws_path">
             </div>
-            <div class="form-row" id="node-input-mqtt_ws_port-label">
+            <div class="form-row" id="node-row-mqtt_ws_port">
                 <label for="node-input-mqtt_ws_port"><i class="fa fa-globe"></i> <span data-i18n="aedes-mqtt-broker.label.mqtt_ws_port"></label>
                 <input type="text" id="node-input-mqtt_ws_port" data-i18n="[placeholder]aedes-mqtt-broker.placeholder.mqtt_ws_port">
             </div>
@@ -74,8 +74,16 @@
                 </div>
             </div>
             <div class="form-row">
-                <label for="node-input-dburl"><i class="fa fa-database"></i> <span data-i18n="aedes-mqtt-broker.label.dburl"></label>
-                <input type="text" id="node-input-dburl" data-i18n="[placeholder]aedes-mqtt-broker.placeholder.dburl">
+                <label for="node-input-persistence_bind"><i class="fa fa-globe"></i> <span data-i18n="aedes-mqtt-broker.label.persistence_bind"></label>
+                <select id="node-input-persistence_bind" type="text" style="width:30%" text-center>
+                    <option value="memory" data-i18n="aedes-mqtt-broker.label.persistence_memory" default></option>
+                    <option value="mongodb" data-i18n="aedes-mqtt-broker.label.persistence_mongodb"></option>
+                    <option value="nedb" data-i18n="aedes-mqtt-broker.label.persistence_nedb"></option>
+                </select>
+            </div>
+            <div class="form-row" id="node-row-dburl" class="hide">
+                <label for="node-input-dburl"><i class="fa fa-database"></i> <span data-i18n="aedes-mqtt-broker.label.mongodb_dburl"></label>
+                <input type="text" id="node-input-dburl" data-i18n="[placeholder]aedes-mqtt-broker.placeholder.mongodb_dburl">
             </div>
         </div>
         <div id="aedes-broker-tab-security" style="display:none">
@@ -122,6 +130,7 @@
       },
       certname: { value: '' },
       keyname: { value: '' },
+      persistence_bind: { value: 'memory', required: true},
       dburl: { value: '', required: false },
       usetls: { value: false }
     },
@@ -161,20 +170,47 @@
         tabs.resize();
       }, 0);
       $('#node-input-mqtt_ws_bind').on('change', function(){
-        var wsPathLabel = $('#node-input-mqtt_ws_path-label');
-        var wsPortLabel = $('#node-input-mqtt_ws_port-label');
+        var wsPathRow = $('#node-row-mqtt_ws_path');
+        var wsPortRow = $('#node-row-mqtt_ws_port');
         switch($(this).val()){
           case "path":
-            wsPathLabel.show();
-            wsPortLabel.hide();
+            wsPathRow.show();
+            wsPortRow.hide();
             break;
           case "port":
-            wsPathLabel.hide();
-            wsPortLabel.show();
+            wsPathRow.hide();
+            wsPortRow.show();
             break;
           default:
-            wsPathLabel.hide();
-            wsPortLabel.show();
+            wsPathRow.hide();
+            wsPortRow.show();
+            break;
+        }
+      });
+      let mongoUrlLabel = $('#node-row-dburl');
+      if (typeof this.persistence_bind === 'undefined') {
+        this.persistence_bind = "memory";
+      }
+      /*
+      if (this.persistence_bind === 'mongodb') {
+        mongoUrlLabel.show();
+      } else {
+        mongoUrlLabel.hide();
+      }
+       */
+      $('#node-input-persistence_bind').on('change', function(){
+        switch($(this).val()){
+          case "memory":
+            mongoUrlLabel.hide();
+            break;
+          case "mongodb":
+            mongoUrlLabel.show();
+            break;
+          case "nedb":
+            mongoUrlLabel.hide();
+            break;
+          default:
+            mongoUrlLabel.hide();
             break;
         }
       });
