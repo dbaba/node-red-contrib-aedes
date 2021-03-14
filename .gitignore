@@ -108,6 +108,8 @@ dist
 /test/secure/
 /test/aedes_secure_spec.js
 /secure/
+/data/
 
 # package-lock.json
 package-lock.json
+/data/

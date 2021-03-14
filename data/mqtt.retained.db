@@ -1,1 +1,1 @@
-{"cmd":"publish","brokerId":"1ede6326-5967-4a27-931c-8fb18e6f884d","brokerCounter":3,"topic":"test1883","payload":{"type":"Buffer","data":[82,101,116,97,105,110,101,100,32,77,101,115,115,97,103,101]},"qos":0,"retain":true,"dup":false,"_id":"unThSwF4B8DAB8AQ"}
+{"cmd":"publish","brokerId":"2811c6ae-47a3-49c9-abdd-4f077b43ec13","brokerCounter":2,"topic":"test1883","payload":{"type":"Buffer","data":[116,101,115,116]},"qos":0,"retain":true,"dup":false,"_id":"unThSwF4B8DAB8AQ"}
